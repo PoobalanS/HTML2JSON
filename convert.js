@@ -1,7 +1,8 @@
 const fs = require('fs');
 
 const { v4: uuidv4 } = require('uuid');
-
+  
+  
 var html2json = require('html2json').html2json;
 var json2html = require('html2json').json2html;
 
@@ -28,7 +29,6 @@ const convert = function () {
 	
 	if(typeof data == "object")
 	{
-	
 		all_elements = []
 		
 		data.forEach(element => {
@@ -47,14 +47,13 @@ const convert = function () {
 					content: '',
 					parentID: p_id,
 					level: level,
+					content_type: ''
 				}
 					
 				if(element.child)
 				{
-					
 					element.child.forEach(element1 =>{
 						
-					
 						if(element1.node == 'text')
 						{
 							if(element1.text != '\n')
@@ -66,13 +65,19 @@ const convert = function () {
 					
 					})
 					
+					if(content != '')
+					{
+						result.content_type = 'content'	
+					}else{
+						result.content_type = 'container'	
+					}
+					
 					result.content = content
 				
-					console.log('result:', result);
+					console.log('result:',result)
 					
 					findChild(element.child,result.id,level+1)
-				}
-					
+				}	
 			}
 			
 		});
