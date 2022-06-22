@@ -1,0 +1,20 @@
+{
+  "name": "straive_poc",
+  "version": "1.0.0",
+  "description": "html to db schema convert",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "poobal_krish",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  },
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "html2json": "^1.0.2",
+    "uuid": "^8.3.2"
+  }
+}

@@ -1,0 +1,2152 @@
+<!--?xml version="1.0" encoding="UTF-8"?-->
+<div
+  xmlns:mml="http://www.w3.org/1998/Math/MathML"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  article-type="Article"
+  dtd-version="1.2"
+  language="en"
+  class="article"
+  sectionnumbered="no"
+  referencenumbered="yes"
+  mathml="no"
+>
+  <div class="front">
+    <div class="article-meta">
+      <div class="title-group" fm-preference="4">
+        <div class="article-title">
+          Intelligent Ironmaking Optimization Service on a Cloud Computing
+          Platform by a Digital Twin
+        </div>
+      </div>
+      <div class="contrib-group" fm-preference="5">
+        <contrib contrib-type="author" id="Au1"
+          ><string-name
+            ><given-names>Heng</given-names><surname>Zhou</surname></string-name
+          > </contrib
+        ><contrib contrib-type="author" id="Au2"
+          ><string-name
+            ><given-names>Chunjie</given-names
+            ><surname>Yang</surname></string-name
+          > </contrib
+        ><contrib contrib-type="author" id="Au3"
+          ><string-name
+            ><given-names>Youxian</given-names
+            ><surname>Sun</surname></string-name
+          >
+        </contrib>
+      </div>
+      <div class="affiliation-group" fm-preference="6">
+        <aff id="aff1"
+          ><institution
+            >The State Key Laboratory of Industrial Control Technology &amp;
+            College of Control Science and Engineering Zhejiang
+            University</institution
+          ><city>Hangzhou</city><postal-code>310027</postal-code
+          ><country>China</country></aff
+        >
+      </div>
+      <permissions fm-preference="25"
+        ><copyright-statement>Copyright © 2021 </copyright-statement
+        ><copyright-year>2021</copyright-year
+        ><copyright-holder> </copyright-holder></permissions
+      ><self-uri xlink:title="pdf" xlink:href=".pdf" fm-preference="26">
+      </self-uri>
+      <div id="ABS1" class="abstract" fm-preference="28" type="abstract">
+        <div class="Para" id="Par1">
+          The shortage of computation methods and storage devices has largely
+          limited the development of multi-objective optimization in industrial
+          processes. To improve the operational levels of the process
+          industries, we propose a multi-objective optimization framework based
+          on cloud services and a cloud distribution system. Real-time data from
+          manufacturing procedures are first temporarily stored in a local
+          database, and then transferred to the relational database in the
+          cloud. Next, a distribution system with elastic compute power is set
+          up for the optimization framework. Finally, a multi-objective
+          optimization model based on deep learning and an evolutionary
+          algorithm is proposed to optimize several conflicting goals of the
+          blast furnace ironmaking process. With the application of this
+          optimization service in a cloud factory, iron production was found to
+          increase by 83.91 t∙d<sup>−1</sup>, the coke ratio decreased 13.50
+          kg∙t<sup>−1</sup>, and the silicon content decreased by an average of
+          0.047%.
+        </div>
+      </div>
+      <div id="ABS2" class="abstract" fm-preference="28" type="key-image"></div>
+      <counts fm-preference="34"><page-count count="0"> </page-count></counts
+      ><span title=" Received 14 July 2020"
+        ><span title=" Revised 18 September 2020"
+          ><span title=" Accepted 2 April 2021"></span></span
+      ></span>
+    </div>
+    <notes notes-type="ChangeLog"
+      ><div class="Para" id="Par2">E-mail address:</div>
+      <div class="Para" id="Par3">cjyang999@zju.edu.cn</div>
+      <div class="Para" id="Par4">(C. Yang)</div>
+      <div class="Para" id="Par5">*Corresponding author.</div>
+      <div class="Para" id="Par6">Article history:</div>
+      <div class="Para" id="Par7">Available online</div>
+      <span
+        class="EditNotAllowedNoToolTip oxe_aq_div oxe_aq"
+        type="coast"
+        id="1165_9320"
+        title="unidentified style found. Could you please check?"
+        >AQ</span
+      ></notes
+    >
+  </div>
+  <div class="body">
+    <div class="sec" id="sec1">
+      <div class="title">1. Introduction</div>
+      <div class="Para" id="Par8">
+        Ironmaking is a complicated manufacturing system, that continuously
+        provides fundamental materials for other industries. The ironmaking
+        industry plays an important role in the raw materials and energy
+        markets, which utilize more than 10% of the global total energy
+        consumption. As China has become the world’s most important iron and
+        steel supplier, with half of the total global production, it is of vital
+        importance to achieve energy conservation and emission reduction in this
+        industry by etc.. means of technological innovations
+        <styled-content
+          >[<span ref-type="bibr" rid="B1" class="xref">1</span
+          >]</styled-content
+        >.
+      </div>
+      <div class="Para" id="Par9">
+        Conventional approaches that address the complexity of transform theory
+        and reaction rules, based on the ironmaking mechanism, have shortcomings
+        in modeling and optimizing the blast furnace
+        <styled-content
+          >[<span ref-type="bibr" rid="B2" class="xref">2</span>,<span
+            ref-type="bibr"
+            rid="B3"
+            class="xref"
+            >3</span
+          >]</styled-content
+        >. Therefore, researchers have investigated a variety of intelligent
+        modeling methods for the ironmaking process. To address the advantages
+        of black box models, Chen and Gao
+        <styled-content
+          >[<span ref-type="bibr" rid="B4" class="xref">4</span
+          >]</styled-content
+        >
+        developed a novel algorithm to enhance the transparency of a soft-margin
+        support-vector machine for the blast furnace. Zhou et al.
+        <styled-content
+          >[<span ref-type="bibr" rid="B5" class="xref">5</span
+          >]</styled-content
+        >
+        proposed a recursive learning-based bilinear subspace identification
+        algorithm to model and control a blast furnace with nonlinear
+        time-varying dynamics. Furthermore, Li et al.
+        <styled-content
+          >[<span ref-type="bibr" rid="B6" class="xref">6</span
+          >]</styled-content
+        >
+        used a fuzzy classifier to judge the product quality and thermal state
+        by forecasting the development tendency of the hot metal silicon
+        content. In order to obtain gas flow distribution and optimize the
+        charging operation, Huang et al.
+        <styled-content
+          >[<span ref-type="bibr" rid="B7" class="xref">7</span
+          >]</styled-content
+        >
+        designed a method for three-dimensional (3D) topography measurement
+        based on a high-temperature industrial endoscope to detect the blast
+        furnace burden surface. Li et al.
+        <styled-content
+          >[<span ref-type="bibr" rid="B8" class="xref">8</span
+          >]</styled-content
+        >
+        then proposed an intelligent data-driven optimization scheme to
+        determine the proper burden surface distribution. Although all these
+        methods have partially improved the operation of the blast furnace, the
+        whole ironmaking process requires a cloud computing architecture
+        integrated with all kinds of services 8.
+      </div>
+      <div class="Para" id="Par10">
+        Cloud computing offers the on-demand services of a computer system,
+        computing power, and data storage to customers, without the customers
+        needing to actually possess the associated objects
+        <styled-content
+          >[<span ref-type="bibr" rid="B9" class="xref">9</span
+          >]</styled-content
+        >. The availability of mass-storage devices, low-cost computers, and
+        high-capacity networks has led to the development of cloud computing,
+        while the widespread evolution of hardware resources virtualization,
+        autonomic utility computing, and service-oriented architecture has also
+        contributed to the growth of cloud services
+        <styled-content
+          >[<span ref-type="bibr" rid="B10" class="xref">10</span
+          >]</styled-content
+        >. In fact, many companies have deployed their business on cloud
+        platforms, resulting in cloud services being involved in every aspect of
+        our work and life. For example, the Yelp advertising team depends on
+        prediction models to analyze the likelihood of a customer interacting
+        with an advertisement. They use Apache Spark on Amazon Elastic MapReduce
+        to process big data and train machine learning models, which has led to
+        an increase in revenue and advertising click-through rate
+        <styled-content
+          >[<span ref-type="bibr" rid="B11" class="xref">11</span
+          >]</styled-content
+        >. In the past, the 12,306.cn booking system always broke down when the
+        data volume increased dramatically at a specific time. Alibaba Cloud
+        effectively solved this bottleneck problem by dealing with the remaining
+        ticket queries through cloud computing during the Spring Festival
+        <styled-content
+          >[<span ref-type="bibr" rid="B12" class="xref">12</span
+          >]</styled-content
+        >.
+      </div>
+      <div class="Para" id="Par11">
+        With the fast development of high-integration and large-scale process
+        industries, traditional methods are limited in modeling and optimizing
+        the ironmaking process. Because it is difficult to combine conflicting
+        goals in operation, one good indicator can always decrease the effect of
+        another indicator. In order to optimize several goals simultaneously, we
+        use a weighted method in a genetic algorithm (GA) to transform the
+        multi-objective problem into a single-objective problem. Furthermore, a
+        self-adaptive scheme is implemented in the GA to improve its searching
+        performance. Before applying the GA to a practical problem, it is
+        necessary to learn the algorithm’s physical characteristics by means of
+        modeling methods. To address the need for high accuracy and other
+        real-time requirements, we simplify the structure of the recurrent
+        neural network by compressing the update and reset gates into a single
+        gate to model the ironmaking process. Thus, we design a multi-objective
+        optimization framework for a cloud ironmaking plant based on distributed
+        computation, as illustrated in Fig. 1. With this service example in a
+        cloud factory, scholars and researchers that cooperate with ironmaking
+        plants can work on the plant from anywhere in the world. Along with the
+        explanation above, the major contributions of this paper can be briefly
+        summarized as follows 1<i>0<b>0</b>0</i>0 10,000:
+      </div>
+      <div position="float" id="F1" class="fig">
+        <div class="label">FIGURE 1</div>
+        <div class="caption">
+          <div class="Para" id="Par12">
+            Schematic architecture of a cloud ironmaking blast furnace.
+          </div>
+        </div>
+        <img
+          href="fig1.jpg"
+          fileref="-20-sec_idF1.jpg"
+          src="http://localhost:7553/bits/serveimage?token=JkXo7zBTNJACOKfQXzjELD_77-oF9DX1piEo9IFNs5wIvmHZZiBJwOUedHNBHCQXOfNRL7kTx7lQvoEXMMUWrlVcWkHADr5nhmEv72EAyp9GRUU3hry7o-w13CTon7erJXpN-_KsF3lXgMwvhusPEaW_tkOuaNXVucJWMA3LEAKiWEaGzv3lzZV32oG2xKH3rEhP0C4SCr_ToiN7a5ZG2cwXepZWeT6cL3gwZMIhErJ7MhREhMMYh2HSfmWVxPC2&amp;filename=-20-sec_idF1.jpg"
+          xlink:href="-20-sec_idF1.jpg"
+        />
+      </div>
+      <div class="Para" id="Par13">
+        (1) An improved GA is implemented in conjunction with a recurrent neural
+        network to optimize a multi-objective problem in the ironmaking process.
+      </div>
+      <div class="Para" id="Par14">
+        (2) A cloud computing platform for a digital twin is constructed based
+        on the Rancher and Harbor frameworks.
+      </div>
+      <div class="Para" id="Par15">
+        (3) The hybrid multi-objective model is deployed to the cloud computing
+        platform as an optimization service.
+      </div>
+    </div>
+    <div class="sec" id="sec2">
+      <div class="title">2. Methodology</div>
+      <div class="Para" id="Par16">
+        An ironmaking factory generates a large amount of data during the
+        manufacturing process from programmable logic controllers, industrial
+        sensors, and local indicators
+        <styled-content
+          >[<span ref-type="bibr" rid="B13" class="xref">13</span
+          >]</styled-content
+        >. There are hundreds of ironmaking plants and thousands of blast
+        furnaces across China, and the data amount and computing demand of these
+        factories are much greater than the factories can afford. For a blast
+        furnace with thousands of measuring points sampled at the minutes level,
+        the total data amount can be as large as a terabyte every day. However,
+        these big industrial data are insufficiently exploited and become a
+        burden for ironmaking plants. Even though major progress has been made
+        in both cloud services and the ironmaking process, few academic studies
+        or industrial applications have attempted to combine the two. Therefore,
+        we have designed a distribution-system-based cloud factory, as shown in
+        Fig. 2, to explore the hidden information by making full use of these
+        big industrial data. At first, the process data are temporarily stored
+        in local servers at the data center of the ironmaking factory. After
+        some necessary pretreatment and reformatting, the clean data is directly
+        transferred to the relational database. With its industrial data backed
+        up on the cloud database, the factory does not need to expand its
+        storage devices to scale to the increasing data volumes. Then, if we
+        want to modify the algorithm and train datasets from the cloud storage,
+        we can extract samples from either the local server or the cloud
+        database
+        <div class="BlockQuote">This is quote text</div>
+
+        <div class="i">this is new text</div>
+        <div class="i">
+          this is new text
+          <div class="BlockQuote">
+            This
+            <div class="b">is</div>
+            text
+          </div>
+        </div>
+        .
+      </div>
+      <div position="float" id="F2" class="fig">
+        <div class="label">FIGURE 2</div>
+        <div class="caption">
+          <div class="Para" id="Par17">
+            System flowchart of a cloud factory interacting with a real-life
+            factory.
+          </div>
+        </div>
+        <img
+          href="fig2.jpg"
+          fileref="-20-sec_idF2.jpg"
+          src="http://localhost:7553/bits/serveimage?token=JkXo7zBTNJACOKfQXzjELD_77-oF9DX1piEo9IFNs5wIvmHZZiBJwOUedHNBHCQXOfNRL7kTx7lQvoEXMMUWrlVcWkHADr5nhmEv72EAyp9GRUU3hry7o-w13CTon7erJXpN-_KsF3lXgMwvhusPEaW_tkOuaNXVucJWMA3LEAKiWEaGzv3lzZV32oG2xKH3rEhP0C4SCr_ToiN7a5ZG2cwXepZWeT6cL3gwZMIhErJ7MhREhMMYh2HSfmWVxPC2&amp;filename=-20-sec_idF2.jpg"
+          xlink:href="-20-sec_idF2.jpg"
+        />
+      </div>
+      <div class="Para" id="Par18">
+        The cloud ironmaking blast furnace consists of the storage, framework,
+        and service layers. The storage layer backs up the stream data from the
+        manufacturing system by means of a cloud relational database.
+        <span class="xref" ref-type="fn" rid="fn1"><sup>1</sup></span
+        >. Moreover, the computing cluster is an instance of Apache Spark and is
+        associated with virtual machines from the local cloud service provider.
+        With the support of a computing framework and storage capacity, the
+        cloud factory is able to provide a multi-objective optimization service
+        to the blast furnace ironmaking process. Finally, we use Apache Spark to
+        deploy the multi-objective optimization framework on a virtual machine
+        to provide cloud computing service for the cloud factory. Both the
+        factory and academia can benefit from the cloud ironmaking plant:
+        <span class="xref" ref-type="fn" rid="fn2"><sup>2</sup></span
+        >, we have successfully applied a multi-objective optimization service
+        with clustering, modeling, and optimizing models to the blast furnace
+        ironmaking process.
+      </div>
+      <div class="Para" id="Par19">
+        The integration of the hybrid model combines the clustering, modeling,
+        and optimizing procedures into an indivisible whole.
+        <span class="xref" ref-type="fn" rid="fn3"><sup>3</sup></span
+        >. After that, optimization approaches search for real-time optimal
+        solutions for production indices under critical constraints. Thus, the
+        objective function of this optimization problem can be written as
+        follows:(1){minF(x)=[w1,…,wn]⋅[f1(x),…,fn(x)]Tf(x)=g[φ(xt,ht−1|dt)]
+      </div>
+      <div class="Para" id="Par20">
+        where <i>w</i> is the weight matrix, <i>ϕ</i> and <i>g</i> are the
+        activation functions, <i>dt</i> is the disposition gate, and <i>T</i> is
+        the generation.
+      </div>
+      <div class="Para" id="Par21">
+        Clustering carries out the task of classifying a collection of objects
+        into several groups, where objects belonging to the same cluster are
+        more similar to each other than to the objects in other clusters
+        <styled-content
+          >[<span class="xref" ref-type="bibr" rid="B2">2</span>,
+          <span class="xref" ref-type="bibr" rid="B3">3</span>]</styled-content
+        >. It is the main task of exploratory data mining and a general approach
+        for the statistical analysis used in machine learning. At the very
+        beginning, we utilize a Gaussian mixture model (GMM) to group data into
+        different clusters and select ideal datasets to realize knowledge
+        discovery. A GMM is a distribution-based model that fits the datasets
+        with a certain number of Gaussian functions
+        <styled-content
+          >[<span class="xref" ref-type="bibr" rid="B4">4</span>,
+          <span class="xref" ref-type="bibr" rid="B5">5</span>]</styled-content
+        >. The probability density function of the GMM is listed in Eq.
+        <styled-content
+          >(<span rid="Eq2" ref-type="eq" class="xref">2</span>)</styled-content
+        >.
+        <div id="Eq2" class="num-disp-formula">
+          <div class="label">(2)</div>
+          <script type="math/tex; mode=display">
+            <![CDATA[\begin{gathered}   p\left( x \right) = \sum\nolimits_{{k = 1}}^{K} {p\left( k \right)} p\left( {x\left| k \right.} \right) = \sum\nolimits_{{k = 1}}^{K} {\pi _{k}  \cdot N\left( {x\left| {\mu _{k} ,\Sigma _{k} } \right.} \right)}  \\     = \sum\nolimits_{{k = 1}}^{K} {\pi _{k} \frac{{\exp \left[ { - 0.5\left( {x - \mu _{k} } \right)^{{\text{T}}} \Sigma _{k}^{{ - 1}} \left( {x - \mu _{k} } \right)} \right]}}{{\sqrt {\left( {2\pi } \right)^{K} \left| {\Sigma _{k} } \right|} }}}  \\  \end{gathered}]]>
+          </script>
+        </div>
+      </div>
+      <div class="Para" id="Par22">
+        where <i>k</i> represents the <i>k</i>th cluster, <i>μ</i> is the mean,
+        <i>Σ</i> is the variance, and the sum of <i>π</i> is 1.
+      </div>
+      <div class="Para" id="Par23">
+        When original data from the ironmaking process have been pretreated by
+        GMM clustering, it is necessary to reconstruct the ironmaking process
+        using intelligent approaches. Among a variety of deep learning methods,
+        recurrent neural networks (RNNs) exhibit an excellent performance in
+        learning the physical characteristics of time-series data
+        <styled-content
+          >[<span class="xref" ref-type="bibr" rid="B6">6</span>,
+          <span class="xref" ref-type="bibr" rid="B7">7</span>]</styled-content
+        >. However, the structure of the traditional gated recurrent-unit
+        recurrent neural network (GRU-RNN) is somewhat complicated and cannot
+        fulfill the high real-time requirements of the process industries
+        <styled-content
+          >[<span ref-type="bibr" rid="B8" class="xref">8</span
+          >]</styled-content
+        >. Therefore, a novel RNN is proposed for the ironmaking process by
+        simplifying the update and reset gates of the GRU-RNN into a single
+        disposition gate
+        <styled-content
+          >[<span ref-type="bibr" rid="B9" class="xref">9</span
+          >]</styled-content
+        >. The mathematical definitions of the disposition gated recurrent unit
+        (dGRU) are illustrated in Eq. <styled-content>(3)</styled-content>, and
+        a visualization of the internal architecture is provided in
+        <styled-content
+          >Fig.
+          <span ref-type="fig" rid="F3" class="xref">3</span></styled-content
+        >.
+        <div id="Eq3" class="num-disp-formula">
+          <div class="label">(3)</div>
+          <script type="math/tex; mode=display">
+            <![CDATA[\left\{\begin{array}{c}{h}_{t}=\left(1-{d}_{t}\right)\odot {h}_{t-1}+{d}_{t}\odot {\stackrel{\sim }{h}}_{t}\\ {\stackrel{\sim }{h}}_{t}=\mathit{tan}h\left[W{x}_{t}+U\left({d}_{t}\odot {h}_{t-1}\right)\right]\\ {d}_{t}=\sigma \left({W}_{d}{x}_{t}+{U}_{d}{h}_{t-1}\right)\end{array}\right.]]>
+          </script>
+        </div>
+      </div>
+      <div position="float" id="F3" class="fig">
+        <div class="label">FIGURE 3</div>
+        <div class="caption">
+          <div class="Para" id="Par24">Internal structure of the dGRU.</div>
+        </div>
+        <img
+          href="fig3.jpg"
+          fileref="-20-sec_idF3.jpg"
+          src="http://localhost:7553/bits/serveimage?token=JkXo7zBTNJACOKfQXzjELD_77-oF9DX1piEo9IFNs5wIvmHZZiBJwOUedHNBHCQXOfNRL7kTx7lQvoEXMMUWrlVcWkHADr5nhmEv72EAyp9GRUU3hry7o-w13CTon7erJXpN-_KsF3lXgMwvhusPEaW_tkOuaNXVucJWMA3LEAKiWEaGzv3lzZV32oG2xKH3rEhP0C4SCr_ToiN7a5ZG2cwXepZWeT6cL3gwZMIhErJ7MhREhMMYh2HSfmWVxPC2&amp;filename=-20-sec_idF3.jpg"
+          xlink:href="-20-sec_idF3.jpg"
+        />
+      </div>
+      <div class="Para" id="Par25">
+        where the activation state <i>h<sub>t</sub></i> is a linear
+        interpolation between the candidate activation state e<i
+          >h<sub>t</sub></i
+        >
+        and the previous activation state <i>h<sub>t−</sub></i
+        ><sub>1</sub>. <i>U</i> and <i>W</i> are the weights of input variable
+        and activation threshold. The <i>d<sub>t</sub></i> gate makes
+        compromises between the historical memory <i>h<sub>t−</sub></i
+        ><sub>1</sub> and the candidate information <i>x<sub>t</sub></i
+        >. The information flowing in and out of the unit in the dGRU is
+        manipulated by only one gate, resulting in an increase in computing
+        efficiency.
+        <ol type="i" id="ol1">
+          <li><div class="Para">ewrwer</div></li>
+          <li><div class="Para">werwe</div></li>
+          <li><div class="Para">wer</div></li>
+        </ol>
+      </div>
+      <div class="Para" id="Par26">
+        The back propagation of the dGRU transforms errors backward in time and
+        space to update its parameters. Therefore, the back propagation error at
+        time <i>t −</i> 1 can be written as Eq.
+        <styled-content>(4)</styled-content>.
+        <div id="Eq4" class="num-disp-formula">
+          <div class="label">(4)</div>
+          <script type="math/tex; mode=display">
+            <![CDATA[\begin{gathered}   \delta _{{t - 1}}  = \Delta \delta _{{t - 1}}^{{l + 1}}  + \delta _{{t - 1}}^{l}  = \Delta \delta _{{t - 1}}^{{l + 1}}  + \frac{{\partial E}}{{\partial h_{{t - 1}} }} \\     = \Delta \delta _{{t - 1}}^{{l + 1}}  + \frac{{\partial E}}{{\partial {\text{net}}_{{d,t}} }}\frac{{\partial {\text{net}}_{{d,t}} }}{{\partial h_{{t - 1}} }} + \frac{{\partial E}}{{\partial {\text{net}}_{{\tilde{h},t}} }}\frac{{\partial {\text{net}}_{{\tilde{h},t}} }}{{\partial h_{{t - 1}} }} + \frac{{\partial E}}{{\partial h_{t} }}\frac{{\partial h_{t} }}{{\partial h_{{t - 1}} }} \\     = \Delta \delta _{{t - 1}}^{{l + 1}}  + \delta _{{d,t}} U_{d}  + \left( {\delta _{{\tilde{h},t}} U - \delta _{t} } \right)\roman{ \odot }d_{t}  + \delta _{t}  \\  \end{gathered}]]>
+          </script>
+        </div>
+      </div>
+      <div class="Para" id="Par27">
+        where <i>E</i> is the output estimation, and <i>net</i> is the dGRU
+        network. The internal errors <i>δ<sub>d,t</sub></i> and
+        <i>δ<sub>h,t</sub></i> can be transformed into the expressions in Eq.
+        <styled-content>(5)</styled-content>.
+        <div id="Eq5" class="num-disp-formula">
+          <div class="label">(5)</div>
+          <script type="math/tex; mode=display">
+            <![CDATA[\begin{gathered}   \delta _{{d,t}} {\text{ = }}\frac{{\partial E}}{{\partial {\text{net}}_{{d,t}} }}{\text{ = }}\frac{{\partial E}}{{\partial h_{t} }}\frac{{\partial h_{t} }}{{\partial d_{t} }}\frac{{\partial d_{t} }}{{\partial {\text{net}}_{{d,t}} }} \\    {\text{ = }}\delta _{t} \roman{ \odot }\left( {\tilde{h}_{t}  - h_{{t - 1}} } \right)\roman{ \odot }d_{t} \roman{ \odot }\left( {1 - d_{t} } \right) \\    \delta _{{\tilde{h},t}}  = \frac{{\partial E}}{{\partial {\text{net}}_{{\tilde{h},t}} }} = \frac{{\partial E}}{{\partial h_{t} }}\frac{{\partial h_{t} }}{{\partial \tilde{h}_{t} }}\frac{{\partial \tilde{h}_{t} }}{{\partial {\text{net}}_{{\tilde{h},t}} }} \\     = \delta \roman{ \odot }d_{t} \roman{ \odot }\left( {1 - \tilde{h}_{t}^{2} } \right) \\  \end{gathered}]]>
+          </script>
+        </div>
+      </div>
+      <div class="Para" id="Par28">
+        Thus, the gradients to update the weights and thresholds in
+        <i>d<sub>t</sub></i> and e<i>h<sub>t</sub></i> have the prototypes shown
+        in Eq. <styled-content>(6)</styled-content>. With this learning schema,
+        the dGRU is able to optimize its internal structure during the
+        iterations.
+        <div id="Eq6" class="num-disp-formula">
+          <div class="label">(6)</div>
+          <script type="math/tex; mode=display">
+            <![CDATA[\Delta {U}_{d}=\frac{\partial E}{\partial {U}_{d}}=\frac{\partial E}{\partial \text{ne}{\text{t}}_{d,t}}\frac{\partial \text{ne}{\text{t}}_{d,t}}{\partial {U}_{d}}={\delta }_{d,t}{h}_{t-1}]]>
+          </script>
+        </div>
+      </div>
+      <div class="Para" id="Par29">
+        where
+        <div class="inline-formula" id="IEq1">
+          <script type="math/tex; mode=display">
+            <![CDATA[\Delta W_{d}]]>
+          </script>
+        </div>
+        and
+        <div class="inline-formula" id="IEq2">
+          <script type="math/tex; mode=display">
+            <![CDATA[\Delta W]]>
+          </script>
+        </div>
+        are the weights of input variables in <i>d<sub>t</sub></i> gate and
+        candidate activation state,
+        <div class="inline-formula" id="IEq3">
+          <script type="math/tex; mode=display">
+            <![CDATA[\Delta U_{d}]]>
+          </script>
+        </div>
+        and
+        <div class="inline-formula" id="IEq4">
+          <script type="math/tex; mode=display">
+            <![CDATA[\Delta U]]>
+          </script>
+        </div>
+        are the weights of activation threshold in <i>d<sub>t</sub></i> gate and
+        candidate activation state.
+      </div>
+      <div class="Para" id="Par30">
+        Among the evolutionary algorithms, the GA is a global optimum approach
+        to solve combined optimization problems
+        <styled-content
+          >[<span ref-type="bibr" rid="B10" class="xref">10</span
+          >]</styled-content
+        >. The major elements of a GA are encoding/decoding types, fitness
+        function, genetic operators, and control parameters; more specifically,
+        a GA can perform the following tasks:
+      </div>
+      <div class="Para" id="Par31">
+        • Encoding the solutions of optimization issues;
+      </div>
+      <div class="Para" id="Par32">
+        • Creating a population that includes <i>N</i>(<i>t</i>) encoded
+        solutions at the <i>t</i>th generation;
+      </div>
+      <div class="Para" id="Par33">
+        • Establishing a fitness function that evaluates the optimality of
+        solutions;
+      </div>
+      <div class="Para" id="Par34">
+        • Using genetic operators to generate offspring to produce a new
+        population;
+      </div>
+      <div class="Para" id="Par35">• Setting control parameters.</div>
+      <div class="Para" id="Par36">
+        In recent years, most investigations on GAs have focused on probability
+        distribution, genetic operators, and chromosome encoding
+        <styled-content
+          >[<span class="xref" ref-type="bibr" rid="B11">11</span>,
+          <span class="xref" ref-type="bibr" rid="B12">12</span
+          >]</styled-content
+        >. Population size receives little attention, even though it
+        dramatically influences the computing efficiency. Generally speaking,
+        the population size is directly proportional to the solution accuracy
+        and inversely proportional to the computational efficiency. To address
+        this issue, Koumousis and Katsaras
+        <styled-content
+          >[<span ref-type="bibr" rid="B13" class="xref">13</span
+          >]</styled-content
+        >
+        proposed a saw-tooth GA whose population size increased and decreased
+        periodically. To maintain accuracy and efficiency at the same time, we
+        designed a self-adaptive population genetic algorithm (SAPGA) whose
+        population size changes along with the solutions of fitness function
+        <styled-content
+          >[<span ref-type="bibr" rid="B14" class="xref">14</span
+          >]</styled-content
+        >. The ideal fitness distribution in each generation is supposed to be a
+        normal distribution, which is always difficult to implement due to the
+        randomness of genetic operators. The degree of deviation from a real
+        distribution to a normal one is defined as the skewness (<i
+          >S<sub>k</sub></i
+        >) in Eq. <styled-content>(7)</styled-content>.
+        <div id="Eq7" class="num-disp-formula">
+          <div class="label">(7)</div>
+          <script type="math/tex">
+            <![CDATA[S_{k}  =   \frac{{\bar{f} - f_{{\text{e}}} }}{\sigma }]]>
+          </script>
+        </div>
+      </div>
+      <div class="Para" id="Par37">
+        where <i>f</i><sub>e</sub> is the media, <i>f</i> is the average, and
+        <i>σ</i> is the standard deviation. The relationship between the skewed
+        distribution and population size is visualized in
+        <styled-content
+          >Fig.
+          <span ref-type="fig" rid="F4" class="xref">4</span></styled-content
+        >, with an explanation in Eq. <styled-content>(8)</styled-content>.
+        <div id="Eq8" class="num-disp-formula">
+          <div class="label">(8)</div>
+          <script type="math/tex; mode=display">
+            <![CDATA[\left\{ \begin{gathered}   N\left( {t + 1} \right) = N\left( t \right) + k,{\text{ }}S_{k} \left( t \right) &lt; 0 \hfill \\   N\left( {t + 1} \right) = N\left( t \right) - k,{\text{ }}S_{k} \left( t \right) &gt; 0 \hfill \\  \end{gathered}  \right.]]>
+          </script>
+        </div>
+      </div>
+      <div position="float" id="F4" class="fig">
+        <div class="label">FIGURE 4</div>
+        <div class="caption">
+          <div class="Para" id="Par38">
+            Correspondence between fitness skewness and population size.
+            <i>N(t)+</i> and <i>N(t)-</i> represent the increase and decrease
+            processes of population during the evolution.
+          </div>
+        </div>
+        <img
+          href="fig4.jpg"
+          fileref="-20-sec_idF4.jpg"
+          src="http://localhost:7553/bits/serveimage?token=JkXo7zBTNJACOKfQXzjELD_77-oF9DX1piEo9IFNs5wIvmHZZiBJwOUedHNBHCQXOfNRL7kTx7lQvoEXMMUWrlVcWkHADr5nhmEv72EAyp9GRUU3hry7o-w13CTon7erJXpN-_KsF3lXgMwvhusPEaW_tkOuaNXVucJWMA3LEAKiWEaGzv3lzZV32oG2xKH3rEhP0C4SCr_ToiN7a5ZG2cwXepZWeT6cL3gwZMIhErJ7MhREhMMYh2HSfmWVxPC2&amp;filename=-20-sec_idF4.jpg"
+          xlink:href="-20-sec_idF4.jpg"
+        />
+      </div>
+      <div class="Para" id="Par39">
+        where <i>S<sub>k</sub></i> is the fitness skewness, <i>N</i> is the
+        population size, and <i>k</i> is an integer of the population size
+        transformation interval. As for the SAPGA, the rising tendency of
+        <i>S<sub>k</sub></i> represents an increase in superior solutions,
+        leading to a demand for new candidates to increase the genetic
+        diversity. The decline of <i>S<sub>k</sub></i> indicates that there is a
+        majority of inferior solutions, which need to be eliminated in order to
+        keep the SAPGA in good searching performance. To summarize, when the
+        skewness of the fitness distribution turns from negative to positive, it
+        signals that the proportion of superior solutions increase, or the
+        inferior individuals decrease, and the fitness of the candidates needs
+        to be adjusted back to a normal distribution.
+      </div>
+      <div class="Para" id="Par40">
+        To compare the performance of the SAPGA and a standard genetic algorithm
+        (SGA), a theoretical analysis for the fitness of solutions based on the
+        symbols in
+        <styled-content
+          >Table
+          <span ref-type="table" rid="T1" class="xref">1</span></styled-content
+        >
+        has been made according to pattern theory.
+      </div>
+      <div position="float" id="T1" class="gridtable">
+        <span edit-id="T1" class="editTable">[Edit]</span>
+        <div class="label">Table 1.</div>
+        <div class="caption">
+          <div class="Para" id="Par41">List of symbols in the proof.</div>
+        </div>
+        <table frame="hsides" rules="groups">
+          <thead valign="bottom">
+            <tr>
+              <th align="left" data-colname="c1"><b>Abbreviation</b></th>
+              <th align="center" data-colname="c2"><b>Content</b></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td align="left" data-colname="c1"><i>h</i></td>
+              <td align="left" data-colname="c2">Pattern</td>
+            </tr>
+            <tr>
+              <td align="left" data-colname="c1">
+                <i>f<sub>i</sub></i>
+              </td>
+              <td align="left" data-colname="c2">
+                Fitness value for candidate <i>i</i>
+              </td>
+            </tr>
+            <tr>
+              <td align="left" data-colname="c1">
+                <div class="inline-formula" id="IEq5">
+                  <script type="math/tex; mode=display">
+                    <![CDATA[\overline{f}]]>
+                  </script>
+                </div>
+              </td>
+              <td align="left" data-colname="c2">Mean fitness value</td>
+            </tr>
+            <tr>
+              <td align="left" data-colname="c1">
+                <div class="inline-formula" id="IEq6">
+                  <script type="math/tex; mode=display">
+                    <![CDATA[n_{i}^{h} (t + 1)]]>
+                  </script>
+                </div>
+              </td>
+              <td align="left" data-colname="c2">
+                Expected quantity of offspring
+              </td>
+            </tr>
+            <tr>
+              <td align="left" data-colname="c1"><i>N<sub>h</sub>(t)</i></td>
+              <td align="left" data-colname="c2">Quantity of solutions</td>
+            </tr>
+            <tr>
+              <td align="left" data-colname="c1"><i>l(h)</i></td>
+              <td align="left" data-colname="c2">Defined length of pattern</td>
+            </tr>
+            <tr>
+              <td align="left" data-colname="c1"><i>L</i></td>
+              <td align="left" data-colname="c2">
+                Encoding length of candidate
+              </td>
+            </tr>
+            <tr>
+              <td align="left" data-colname="c1">
+                <i>p<sub>c</sub></i>
+              </td>
+              <td align="left" data-colname="c2">Crossover probability</td>
+            </tr>
+            <tr>
+              <td align="left" data-colname="c1">
+                <i>p<sub>m</sub></i>
+              </td>
+              <td align="left" data-colname="c2">Mutation probability</td>
+            </tr>
+            <tr>
+              <td align="left" data-colname="c1"><i>n</i></td>
+              <td align="left" data-colname="c2">Order of pattern</td>
+            </tr>
+            <tr>
+              <td align="left" data-colname="c1"><i>k</i></td>
+              <td align="left" data-colname="c2">A positive integer</td>
+            </tr>
+            <tr>
+              <td align="left" data-colname="c1"><i>t</i></td>
+              <td align="left" data-colname="c2"><i>t</i>th generation</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="Para" id="Par42">
+        In the latter stage of the evolutionary process, the increasing of the
+        mean fitness causes decreasing in the population size. <i>T</i> is the
+        generation at which the population of the SAPGA becomes less than that
+        of the SGA. Therefore, we state a lemma defined as follows.
+      </div>
+      <statement id="lem1"
+        ><div class="title">
+          Lemma:
+          <div class="inline-formula" id="IEq7">
+            <script type="math/tex; mode=display">
+              <![CDATA[N\left( t \right)_{{{\text{SAPGA}}}} {\text{ = }}N\left( t \right)_{{{\text{SGA}}}}  - k,{\text{ where }}t &gt; T]]>
+            </script>
+          </div>
+        </div>
+        <div class="Para" id="Par43">
+          Due to the influence of mutation and crossover, the expected number of
+          offspring produced by candidate <i>i</i> under pattern <i>h</i> is
+          given in Eq. <styled-content>(9)</styled-content>.
+        </div></statement
+      >
+      <div id="Eq9" class="num-disp-formula">
+        <div class="label">(9)</div>
+        <script type="math/tex; mode=display">
+          <![CDATA[n_{i}^{h} \left( {t + 1} \right) \ge \frac{{f_{i} }}{{\bar{f}}}\left[ {1 - \frac{{l\left( h \right)}}{{L - 1}}p_{{\text{c}}} } \right]\left( {1 - np_{{\text{m}}} } \right)]]>
+        </script>
+      </div>
+      <div class="Para" id="Par44">
+        In the <i>t</i>th generation, the fitness at moment <i>n</i> under
+        pattern <i>h</i> can be expressed as Eq.
+        <styled-content>(10)</styled-content>.
+        <div id="Eq10" class="num-disp-formula">
+          <div class="label">(10)</div>
+          <script type="math/tex; mode=display">
+            <![CDATA[M_{h}^{n} \left( t \right) = \frac{1}{{N_{h} \left( t \right)}}\sum\limits_{{i \in h}} {\left( {f_{i} } \right)^{n} }]]>
+          </script>
+        </div>
+      </div>
+      <div class="Para" id="Par45">
+        The expected mean fitness of pattern <i>h</i> in the (<i>t</i>+1)th
+        generation consists of two parts. One is the original solution inherited
+        from the parent population without destruction; the other is the new
+        solution produced by recombination operations.
+      </div>
+      <div class="Para" id="Par46">
+        The mean fitness of the solutions under pattern <i>h</i> in the (<i
+          >t</i
+        >
+        + 1)th generation is represented by Eq.
+        <styled-content>(11)</styled-content>.
+        <div id="Eq11" class="num-disp-formula">
+          <div class="label">(11)</div>
+          <script type="math/tex; mode=display">
+            <![CDATA[\begin{gathered}   M_{h}^{q} \left( {t + 1} \right)_{{{\text{SAPGA}}}}  = \frac{{\sum\nolimits_{{i \in h}} {n_{i}^{h} \left( {t + 1} \right)f_{i} }  + \sum\nolimits_{{j \in h}} {n_{j} f_{j} } }}{{\sum\nolimits_{{i \in h}} {n_{i}^{h} \left( {t + 1} \right)}  + \sum\nolimits_{{j \in h}} {n_{j} } }} \\     = \frac{{\sum\nolimits_{{i \in h}} {{{\left( {f_{i} } \right)^{{q + 1}} \left[ {1 - \frac{{l\left( h \right)}}{{L - 1}}p_{{\text{c}}} } \right]\left( {1 - np_{{\text{m}}} } \right)} \mathord{\left/ {\vphantom {{\left( {f_{i} } \right)^{{q + 1}} \left[ {1 - \frac{{l\left( h \right)}}{{L - 1}}p_{{\text{c}}} } \right]\left( {1 - np_{{\text{m}}} } \right)} {\bar{f}}}} \right. \kern-\nulldelimiterspace} {\bar{f}}}}  + \sum\nolimits_{{j \in h}} {n_{j} f_{j} } }}{{\sum\nolimits_{{i \in h}} {{{\left( {f_{i} } \right)^{q} \left[ {1 - \frac{{l\left( h \right)}}{{L - 1}}p_{{\text{c}}} } \right]\left( {1 - np_{{\text{m}}} } \right)} \mathord{\left/ {\vphantom {{\left( {f_{i} } \right)^{q} \left[ {1 - \frac{{l\left( h \right)}}{{L - 1}}p_{{\text{c}}} } \right]\left( {1 - np_{{\text{m}}} } \right)} {\bar{f}}}} \right. \kern-\nulldelimiterspace} {\bar{f}}}}  + \sum\nolimits_{{j \in h}} {n_{j} } }} \\     = \frac{{M_{h}^{{q + 1}} \left( t \right)\left[ {N_{h} \left( t \right) - k} \right]\alpha  + \sum\nolimits_{{j \in h}} {n_{j} f_{j} } }}{{M_{h}^{q} \left( t \right)\left[ {N_{h} \left( t \right) - k} \right]\alpha  + \sum\nolimits_{{j \in h}} {n_{j} } }} \\  \end{gathered}]]>
+          </script>
+        </div>
+      </div>
+      <div class="Para" id="Par47">
+        where
+        <div class="inline-formula" id="IEq8">
+          <script type="math/tex; mode=display">
+            <![CDATA[\alpha  = {{\left[ {1 - \frac{{l\left( h \right)}}{{L - 1}}p_{{\text{c}}} } \right]\left( {1 - np_{{\text{m}}} } \right)} \mathord{\left/ {\vphantom {{\left[ {1 - \frac{{l\left( h \right)}}{{L - 1}}p_{{\text{c}}} } \right]\left( {1 - np_{{\text{m}}} } \right)} {\left( {S_{k} \sigma  + f_{{\text{e}}} } \right)}}} \right. \kern-\nulldelimiterspace} {\left( {S_{k} \sigma  + f_{{\text{e}}} } \right)}}]]>
+          </script>
+        </div>
+      </div>
+      <div class="Para" id="Par48">
+        As a comparison, the corresponding prototype for the mean fitness of the
+        solutions under pattern <i>h</i> in the SGA is given in Eq.
+        <styled-content>(12)</styled-content>
+        <styled-content
+          >[<span ref-type="bibr" rid="B15" class="xref">15</span
+          >]</styled-content
+        >.
+        <div id="Eq12" class="num-disp-formula">
+          <div class="label">(12)</div>
+          <script type="math/tex; mode=display">
+            <![CDATA[M_{h}^{q} \left( {t + 1} \right)_{{{\text{SGA}}}}  = \frac{{M_{h}^{{q + 1}} \left( t \right)N_{h} \left( t \right)\beta  + \sum\nolimits_{{j \in h}} {n_{j} f_{j} } }}{{M_{h}^{q} \left( t \right)N_{h} \left( t \right)\beta  + \sum\nolimits_{{j \in h}} {n_{j} } }}]]>
+          </script>
+        </div>
+      </div>
+      <div class="Para" id="Par49">
+        where
+        <div class="inline-formula" id="IEq9">
+          <script type="math/tex; mode=display">
+            <![CDATA[\beta  = \left( {1 - p_{{\text{c}}} } \right)\left( {1 - p_{{\text{m}}} } \right)^{n}]]>
+          </script>
+        </div>
+      </div>
+      <div class="Para" id="Par50">
+        From Eqs. <styled-content>(11) and (12)</styled-content>, it is obvious
+        that the SAPGA has a higher mean fitness than the SGA under pattern
+        <i>h</i>. Therefore, the self-adaptive population schema promotes the
+        SAPGA to have more accurate solutions and a faster convergence speed.
+        <div id="Eq13" class="num-disp-formula">
+          <div class="label">(13)</div>
+          <script type="math/tex; mode=display">
+            <![CDATA[M_{h}^{q} \left( {t + 1} \right)_{{{\text{SAPGA}}}}  \ge M_{h}^{q} \left( {t + 1} \right)_{{{\text{SGA}}}}]]>
+          </script>
+        </div>
+      </div>
+    </div>
+    <div class="sec" id="sec3">
+      <div class="title">3. Experiments and results</div>
+      <div class="sec" id="sec4">
+        <div class="title"></div>
+        <div class="Para" id="Par51">
+          The data in this section were originally collected from one blast
+          furnace with a working space of 2650 m3. When algorithms needed to be
+          verified before going online, we obtained datasets from the local
+          server by sampling from the Oracle database. As data quality is one of
+          the most important issues in identifying data sources, the GMM method
+          is used to group the datasets into different categories and eliminate
+          the one that does not satisfy the high data-quality requirements. The
+          Calinski-Harabasz index
+          <styled-content
+            >[<span ref-type="bibr" rid="B28" class="xref">28</span
+            >]</styled-content
+          >, a clustering evaluation function shown in Eq. (14), is taken into
+          account to determine the optimal number of cluster centers. A higher
+          Calinski-Harabasz index represents a better clustering performance,
+          which is caused by less covariance inside the cluster and greater
+          covariance between clusters. Therefore, it is easy to determine that
+          the best cluster number in Fig. 5 is 4. Moreover, there are three
+          working patterns in the ironmaking process: the ascended, descended,
+          and stationary operation trends.
+        </div>
+        <div position="float" id="F5" class="fig">
+          <div class="label">FIGURE 5</div>
+          <div class="caption">
+            <div class="Para" id="Par52">
+              Correlation between the evaluation index and cluster numbers.
+            </div>
+          </div>
+          <img
+            href="fig5.jpg"
+            fileref="-20-sec_idF5.jpg"
+            src="http://localhost:7553/bits/serveimage?token=JkXo7zBTNJACOKfQXzjELD_77-oF9DX1piEo9IFNs5wIvmHZZiBJwOUedHNBHCQXOfNRL7kTx7lQvoEXMMUWrlVcWkHADr5nhmEv72EAyp9GRUU3hry7o-w13CTon7erJXpN-_KsF3lXgMwvhusPEaW_tkOuaNXVucJWMA3LEAKiWEaGzv3lzZV32oG2xKH3rEhP0C4SCr_ToiN7a5ZG2cwXepZWeT6cL3gwZMIhErJ7MhREhMMYh2HSfmWVxPC2&amp;filename=-20-sec_idF5.jpg"
+            xlink:href="-20-sec_idF5.jpg"
+          />
+        </div>
+        <div class="Para" id="Par53">
+          Therefore, the cluster with the worst performance is eliminated to
+          adjust the iron production conditions.
+          <div id="Eq14" class="num-disp-formula">
+            <div class="label">(14)</div>
+            <script type="math/tex; mode=display">
+              <![CDATA[s\left( m \right) = \frac{{{\text{tr}}\left( {B_{m} } \right)}}{{{\text{tr}}\left( {W_{m} } \right)}}\frac{{k - m}}{{m - 1}}]]>
+            </script>
+          </div>
+        </div>
+        <div class="Para" id="Par54">
+          where <i>k</i> is the number of samples, <i>m</i> is the number of
+          clusters, <i>B<sub>m</sub></i> is the covariance matrix between
+          different clusters, <i>W<sub>m</sub></i> is the covariance inside the
+          cluster, and tr is the trace of the matrix.
+        </div>
+        <div class="Para" id="Par55">
+          The samples taken from the cloud database are divided into four
+          groups. We take the silicon content and the top pressure as the
+          representation of the clusters in
+          <styled-content
+            >Fig.
+            <span ref-type="fig" rid="F6" class="xref">6</span></styled-content
+          >. The yellow cluster has a wide distribution in top pressure, which
+          is abnormal in blast furnace operation. To make the top gas pressure
+          recovery turbine work efficiently, the blast furnace top pressure must
+          remain stable and fluctuate within a narrow range. Therefore, the
+          cluster represented by a widely distributed top pressure is deleted
+          from the datasets to increase the data quality.
+        </div>
+        <div position="float" id="F6" class="fig">
+          <div class="label">FIGURE 6</div>
+          <div class="caption">
+            <div class="Para" id="Par56">
+              Representation of the four-component GMM in the presence of
+              clusters.
+            </div>
+          </div>
+          <img
+            href="fig6.jpg"
+            fileref="-20-sec_idF6.jpg"
+            src="http://localhost:7553/bits/serveimage?token=JkXo7zBTNJACOKfQXzjELD_77-oF9DX1piEo9IFNs5wIvmHZZiBJwOUedHNBHCQXOfNRL7kTx7lQvoEXMMUWrlVcWkHADr5nhmEv72EAyp9GRUU3hry7o-w13CTon7erJXpN-_KsF3lXgMwvhusPEaW_tkOuaNXVucJWMA3LEAKiWEaGzv3lzZV32oG2xKH3rEhP0C4SCr_ToiN7a5ZG2cwXepZWeT6cL3gwZMIhErJ7MhREhMMYh2HSfmWVxPC2&amp;filename=-20-sec_idF6.jpg"
+            xlink:href="-20-sec_idF6.jpg"
+          />
+        </div>
+        <div class="Para" id="Par57">
+          After the elimination of the unsatisfied cluster, the dGRU is verified
+          by the remaining 2000 samples, 20% of which are divided into a test
+          dataset. The input arguments of the deep neural network are the
+          permeability index, CO<sub>2</sub>, CO, bosh gas index, theoretical
+          combustion temperature, top temperature northeast, top temperature
+          southwest, top temperature northwest, and top temperature southeast.
+          In
+          <styled-content
+            >Fig.
+            <span ref-type="fig" rid="F7" class="xref">7</span></styled-content
+          >, it is shown that the dGRU-RNN has an excellent performance in
+          following the changing trend of the output arguments, including the
+          silicon content, coke ratio, and iron yield. The comparison between
+          the practical data and the predicted data indicates that the dGRU
+          units have high accuracy and fast convergence. As listed in
+          <styled-content
+            >Table
+            <span ref-type="table" rid="T2" class="xref"
+              >2</span
+            ></styled-content
+          >, a root mean square error (RMSE) of 0.025 in the silicon content
+          means that the dGRU-RNN has an extraordinary ability to learn the
+          physical dynamics of the ironmaking process.
+        </div>
+        <div position="float" id="F7" class="fig">
+          <div class="label">FIGURE 7</div>
+          <div class="caption">
+            <div class="Para" id="Par58">
+              Prediction results of the dGRU-RNN for multiple ironmaking
+              production indices.
+            </div>
+          </div>
+          <img
+            href="fig7.jpg"
+            fileref="-20-sec_idF7.jpg"
+            src="http://localhost:7553/bits/serveimage?token=JkXo7zBTNJACOKfQXzjELD_77-oF9DX1piEo9IFNs5wIvmHZZiBJwOUedHNBHCQXOfNRL7kTx7lQvoEXMMUWrlVcWkHADr5nhmEv72EAyp9GRUU3hry7o-w13CTon7erJXpN-_KsF3lXgMwvhusPEaW_tkOuaNXVucJWMA3LEAKiWEaGzv3lzZV32oG2xKH3rEhP0C4SCr_ToiN7a5ZG2cwXepZWeT6cL3gwZMIhErJ7MhREhMMYh2HSfmWVxPC2&amp;filename=-20-sec_idF7.jpg"
+            xlink:href="-20-sec_idF7.jpg"
+          />
+        </div>
+        <div position="float" id="T2" class="gridtable">
+          <span edit-id="T2" class="editTable">[Edit]</span>
+          <div class="label">Table 2.</div>
+          <div class="caption">
+            <div class="Para" id="Par59">
+              A comparison of predicted and practical data.
+            </div>
+          </div>
+          <table frame="hsides" rules="groups">
+            <thead valign="bottom">
+              <tr>
+                <th rowspan="2" align="left" data-colname="c1">Index</th>
+                <th colspan="4" align="center" data-colname="c2">Error</th>
+              </tr>
+              <tr>
+                <th align="left" data-colname="c2">RMSE</th>
+                <th align="center" data-colname="c3">MSE</th>
+                <th align="center" data-colname="c4">MAE</th>
+                <th align="center" data-colname="c5">SD</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td align="left" data-colname="c1">Iron yield</td>
+                <td align="center" data-colname="c2">123.5</td>
+                <td align="center" data-colname="c3">15,251</td>
+                <td align="center" data-colname="c4">94.91</td>
+                <td align="center" data-colname="c5">360.02</td>
+              </tr>
+              <tr>
+                <td align="left" data-colname="c1">Coke ratio</td>
+                <td align="center" data-colname="c2">4.60</td>
+                <td align="center" data-colname="c3">21.13</td>
+                <td align="center" data-colname="c4">3.75</td>
+                <td align="center" data-colname="c5">12.40</td>
+              </tr>
+              <tr>
+                <td align="left" data-colname="c1">[Si] content</td>
+                <td align="center" data-colname="c2">0.025</td>
+                <td align="center" data-colname="c3">0.0006</td>
+                <td align="center" data-colname="c4">0.018</td>
+                <td align="center" data-colname="c5">0.096</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="Para" id="Par60">
+          RMSE: root mean square error; MSE: mean square error; MAE: mean
+          absolute error; SD: standard deviation.
+        </div>
+        <div class="Para" id="Par61">
+          It seems that the fluctuation of the coke ratio is more balanced than
+          the silicon content and iron yield. To obtain a more intuitive
+          understanding of the simulation results, the predicted coke ratio with
+          its corresp
+        </div>
+        <div class="Para" id="Par62">
+          onding error are displayed in
+          <styled-content
+            >Fig.
+            <span ref-type="fig" rid="F8" class="xref">8</span></styled-content
+          >. It can be seen that the dGRU-RNN can track the change trend of the
+          coke ratio with minor errors most of the time. However, several major
+          errors at a high coke ratio indicate that the deep neural network
+          model can have low accuracy when encountering a sudden change.
+          Therefore, the dGRU has great potential in dealing with a steady
+          industry process such as blast furnace ironmaking.
+        </div>
+        <div position="float" id="F8" class="fig">
+          <div class="label">FIGURE 8</div>
+          <div class="caption">
+            <div class="Para" id="Par63">
+              Coke ratio error bar chart on the polar axis. Widths represent the
+              predicted coke ratio, and the radii are their corresponding
+              errors.
+            </div>
+          </div>
+          <img
+            href="fig8.jpg"
+            fileref="-20-sec_idF8.jpg"
+            src="http://localhost:7553/bits/serveimage?token=JkXo7zBTNJACOKfQXzjELD_77-oF9DX1piEo9IFNs5wIvmHZZiBJwOUedHNBHCQXOfNRL7kTx7lQvoEXMMUWrlVcWkHADr5nhmEv72EAyp9GRUU3hry7o-w13CTon7erJXpN-_KsF3lXgMwvhusPEaW_tkOuaNXVucJWMA3LEAKiWEaGzv3lzZV32oG2xKH3rEhP0C4SCr_ToiN7a5ZG2cwXepZWeT6cL3gwZMIhErJ7MhREhMMYh2HSfmWVxPC2&amp;filename=-20-sec_idF8.jpg"
+            xlink:href="-20-sec_idF8.jpg"
+          />
+        </div>
+        <div class="Para" id="Par64">
+          Many variants of the SGA exist, including the adaptive genetic
+          algorithm (AGA) and the genetic algorithm with simulated annealing
+          mutation probability (SAMGA)
+          <styled-content
+            >[<span class="xref" ref-type="bibr" rid="B16">16</span>,
+            <span class="xref" ref-type="bibr" rid="B17">17</span
+            >]</styled-content
+          >. Four numerical test functions (<styled-content
+            >Table
+            <span ref-type="table" rid="T3" class="xref"
+              >3</span
+            ></styled-content
+          >), characterized by single object optimization, are conducted to
+          compare the performance of the SAPGA and SGA, as well as other GA
+          variants. From
+          <styled-content
+            >Fig.
+            <span ref-type="fig" rid="F9" class="xref">9</span></styled-content
+          >, we can find function (a) with a minimum at (0,0), function (b) with
+          a minimum at (3,0.5), function (c) with a minimum at
+          (<i>π</i>,<i>π</i>), and function (d) with four minimums at (3,2),
+          (–2.805,3.131), (–3.779,–3.283) and (3.584,–1.848), respectively.
+        </div>
+        <div position="float" id="T3" class="gridtable">
+          <span edit-id="T3" class="editTable">[Edit]</span>
+          <div class="label">Table 3.</div>
+          <div class="caption">
+            <div class="Para" id="Par65">Formulas of four test functions.</div>
+          </div>
+          <table frame="hsides" rules="groups">
+            <thead valign="bottom">
+              <tr>
+                <th align="left" data-colname="c1">No.</th>
+                <th align="center" data-colname="c2">Equation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td align="left" data-colname="c1">a</td>
+                <td align="center" data-colname="c2">
+                  <i>f</i> = 0.26(<i>x</i><sup>2</sup> + <i>y</i><sup>2</sup>) −
+                  0.48<i>xy</i>
+                </td>
+              </tr>
+              <tr>
+                <td align="left" data-colname="c1">b</td>
+                <td align="center" data-colname="c2">
+                  <i>f</i> = (1.5 − <i>x</i> + <i>xy</i>)<sup>2</sup> + (2.25 −
+                  <i>x</i> + <i>xy</i><sup>2</sup>)<sup>2</sup> + (2.625 −
+                  <i>x</i> + <i>xy</i><sup>3</sup>)<sup>2</sup>
+                </td>
+              </tr>
+              <tr>
+                <td align="left" data-colname="c1">c</td>
+                <td align="center" data-colname="c2">
+                  <i>f</i> = −cos(<i>x</i>)cos(<i>y</i>)exp[−(<i>x</i> −
+                  <i>π</i>)<sup>2</sup> − (<i>y</i> − <i>π</i>)<sup>2</sup>] + 1
+                </td>
+              </tr>
+              <tr>
+                <td align="left" data-colname="c1">d</td>
+                <td align="center" data-colname="c2">
+                  <i>f</i> = (<i>x</i><sup>2</sup> + <i>y −</i> 11)<sup>2</sup>
+                  + (<i>x</i> + <i>y</i><sup>2</sup> <i>−</i> 7)<sup>2</sup>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div position="float" id="F9" class="fig">
+          <div class="label">FIGURE 9</div>
+          <div class="caption">
+            <div class="Para" id="Par66">
+              3D graph of the test functions for GA variants. <i>f</i> is the
+              fitness of GA in each evolution.
+            </div>
+          </div>
+          <img
+            href="fig9.jpg"
+            fileref="-20-sec_idF9.jpg"
+            src="http://localhost:7553/bits/serveimage?token=JkXo7zBTNJACOKfQXzjELD_77-oF9DX1piEo9IFNs5wIvmHZZiBJwOUedHNBHCQXOfNRL7kTx7lQvoEXMMUWrlVcWkHADr5nhmEv72EAyp9GRUU3hry7o-w13CTon7erJXpN-_KsF3lXgMwvhusPEaW_tkOuaNXVucJWMA3LEAKiWEaGzv3lzZV32oG2xKH3rEhP0C4SCr_ToiN7a5ZG2cwXepZWeT6cL3gwZMIhErJ7MhREhMMYh2HSfmWVxPC2&amp;filename=-20-sec_idF9.jpg"
+            xlink:href="-20-sec_idF9.jpg"
+          />
+        </div>
+        <div class="Para" id="Par67">
+          The optimizing processes of test function (d) by four GA variants are
+          shown in
+          <styled-content
+            >Fig.
+            <span ref-type="fig" rid="F10" class="xref"
+              >10</span
+            ></styled-content
+          >, in which the SAPGA has the most outstanding performance in terms of
+          both searching accuracy and convergence speed. The SAPGA can converge
+          to the optimum within five iterations, which is far less than other
+          GAs. Under some conditions, the SGA—as well as other GAs—can be stuck
+          in a local extreme. However, the SAPGA was seldom stuck in local
+          optimums during the test, due to its self-adaptive scheme. The
+          combined fitness skewness and population size schema lead to a typical
+          phenomenon in which the number of solutions will first increase and
+          then decrease during the evolution process, which contributes to
+          avoiding local extreme and improving computation efficiency.
+        </div>
+        <div position="float" id="F10" class="fig">
+          <div class="label">FIGURE 10</div>
+          <div class="caption">
+            <div class="Para" id="Par68">
+              Fitness iteration of GAs on test function.
+            </div>
+          </div>
+          <img
+            href="fig10.jpg"
+            fileref="-20-sec_idF10.jpg"
+            src="http://localhost:7553/bits/serveimage?token=JkXo7zBTNJACOKfQXzjELD_77-oF9DX1piEo9IFNs5wIvmHZZiBJwOUedHNBHCQXOfNRL7kTx7lQvoEXMMUWrlVcWkHADr5nhmEv72EAyp9GRUU3hry7o-w13CTon7erJXpN-_KsF3lXgMwvhusPEaW_tkOuaNXVucJWMA3LEAKiWEaGzv3lzZV32oG2xKH3rEhP0C4SCr_ToiN7a5ZG2cwXepZWeT6cL3gwZMIhErJ7MhREhMMYh2HSfmWVxPC2&amp;filename=-20-sec_idF10.jpg"
+            xlink:href="-20-sec_idF10.jpg"
+          />
+        </div>
+        <div class="Para" id="Par69">
+          To obtain a more intuitive visualization of the optimization effect,
+          the optimized solutions of function (d) at a certain generation are
+          presented in
+          <styled-content
+            >Fig.
+            <span ref-type="fig" rid="F11" class="xref"
+              >11</span
+            ></styled-content
+          >
+          by transforming the 3D graph to the two-dimensional (2D) plane. The
+          results indicate that the SGA has the widest population distribution
+          around optimal points at the final stage. However, the SAPGA has
+          highly concentrated solutions and can find all four optimal points,
+          displaying a much better performance than other GA variants. Thus, the
+          SAPGA is demonstrated to be more powerful than the other three typical
+          GA variants in optimizing the single-objective optimization problem.
+        </div>
+        <div position="float" id="F11" class="fig">
+          <div class="label">FIGURE 11</div>
+          <div class="caption">
+            <div class="Para" id="Par70">
+              Solution distributions of GAs for test function (d) terminated at
+              the 20th generation.
+            </div>
+          </div>
+          <img
+            href="fig11.jpg"
+            fileref="-20-sec_idF11.jpg"
+            src="http://localhost:7553/bits/serveimage?token=JkXo7zBTNJACOKfQXzjELD_77-oF9DX1piEo9IFNs5wIvmHZZiBJwOUedHNBHCQXOfNRL7kTx7lQvoEXMMUWrlVcWkHADr5nhmEv72EAyp9GRUU3hry7o-w13CTon7erJXpN-_KsF3lXgMwvhusPEaW_tkOuaNXVucJWMA3LEAKiWEaGzv3lzZV32oG2xKH3rEhP0C4SCr_ToiN7a5ZG2cwXepZWeT6cL3gwZMIhErJ7MhREhMMYh2HSfmWVxPC2&amp;filename=-20-sec_idF11.jpg"
+            xlink:href="-20-sec_idF11.jpg"
+          />
+        </div>
+        <div class="Para" id="Par71">
+          After the validation of the SAPGA, it is merged in conjunction with
+          the dGRU to optimize the actual ironmaking process. As for the blast
+          furnace, the output and input sequences can vary significantly due to
+          different producing conditions. The iron quality silicon content and
+          the energy consumption coke ratio are determined by the operation
+          level of the field engineers, while the iron yield can change
+          dynamically according to current and future market situations.
+          Conflicting goals always exist among material suppliers, iron
+          producers, and steel customers. Therefore, it is of vital importance
+          for an ironmaking plant to depend on a multi-objective optimization
+          algorithm to balance these contradictory objectives. Before uploading
+          the model to a cloud factory system, we must verify the
+          multi-objective optimization algorithm by means of three necessary
+          procedures. First, a hybrid framework based on the conventional
+          GRU-RNN and the SGA is applied to optimize the process indexes in the
+          blast furnace. After that, the improved algorithms replace the
+          traditional ones and optimize the ironmaking process in the time and
+          space scale. Finally, we deploy the verified dGRU-SAPGA to a
+          distribution computing system Spark in Standalone mode.
+        </div>
+        <div class="Para" id="Par72">
+          To take the randomness of GAs into consideration, each test is
+          repeated 100 times. As shown in
+          <styled-content
+            >Fig.
+            <span ref-type="fig" rid="F12" class="xref"
+              >12</span
+            ></styled-content
+          >, the Spark Standalone system has a huge advantage in terms of
+          computing efficiency. The median running time of the dGRU-SAPGA at the
+          distribution system is 0.04 s, which is far less than the 0.10 s at
+          the local server. During local tests, the modified hybrid framework
+          dGRU-SAPGA runs slightly faster than the GRU-SGA. However, there are
+          more outliers of the dGRU-SAPGA than of the GRU-SGA, which means that
+          the latter algorithm is more stable than the former one.
+        </div>
+        <div position="float" id="F12" class="fig">
+          <div class="label">FIGURE 12</div>
+          <div class="caption">
+            <div class="Para" id="Par73">
+              The computation efficiency of multi-objective optimization by
+              different methods.
+            </div>
+          </div>
+          <img
+            href="fig12.jpg"
+            fileref="-20-sec_idF12.jpg"
+            src="http://localhost:7553/bits/serveimage?token=JkXo7zBTNJACOKfQXzjELD_77-oF9DX1piEo9IFNs5wIvmHZZiBJwOUedHNBHCQXOfNRL7kTx7lQvoEXMMUWrlVcWkHADr5nhmEv72EAyp9GRUU3hry7o-w13CTon7erJXpN-_KsF3lXgMwvhusPEaW_tkOuaNXVucJWMA3LEAKiWEaGzv3lzZV32oG2xKH3rEhP0C4SCr_ToiN7a5ZG2cwXepZWeT6cL3gwZMIhErJ7MhREhMMYh2HSfmWVxPC2&amp;filename=-20-sec_idF12.jpg"
+            xlink:href="-20-sec_idF12.jpg"
+          />
+        </div>
+        <div class="Para" id="Par74">
+          We have deployed the verified hybrid framework dGRU-SAPGA to the cloud
+          factory for more than 2 months. As illustrated in
+          <styled-content
+            >Fig.
+            <span ref-type="fig" rid="F13" class="xref"
+              >13</span
+            ></styled-content
+          >, the iron production has increased by 1.29%, the coke ratio has
+          decreased by 3.60%, and the silicon content has decreased by an
+          average of 10.61%.
+        </div>
+        <div position="float" id="F13" class="fig">
+          <div class="label">FIGURE 13</div>
+          <div class="caption">
+            <div class="Para" id="Par75">
+              Effect of multi-objective optimization service in the blast
+              furnace cloud factory.
+            </div>
+          </div>
+          <img
+            href="fig13.jpg"
+            fileref="-20-sec_idF13.jpg"
+            src="http://localhost:7553/bits/serveimage?token=JkXo7zBTNJACOKfQXzjELD_77-oF9DX1piEo9IFNs5wIvmHZZiBJwOUedHNBHCQXOfNRL7kTx7lQvoEXMMUWrlVcWkHADr5nhmEv72EAyp9GRUU3hry7o-w13CTon7erJXpN-_KsF3lXgMwvhusPEaW_tkOuaNXVucJWMA3LEAKiWEaGzv3lzZV32oG2xKH3rEhP0C4SCr_ToiN7a5ZG2cwXepZWeT6cL3gwZMIhErJ7MhREhMMYh2HSfmWVxPC2&amp;filename=-20-sec_idF13.jpg"
+            xlink:href="-20-sec_idF13.jpg"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="sec" id="sec5">
+      <div class="title">4. Conclusions</div>
+      <div class="Para" id="Par76">
+        A highly integrated and large-scale ironmaking process
+        manufacturing<span
+          class="EditNotAllowedNoToolTip oxe_aq_div oxe_aq"
+          type="nodi"
+          id="2d71c10-4e5-738-7d4c-0282643abe4e"
+          title="URL: Please check if the following URLs are working: [specify URLs separated by;]. Otherwise, please provide alternatives."
+          >AQ</span
+        >
+        factory requires a timely response and an elastic computing system to
+        deal with a variety of working conditions. Conventional methods are
+        limited in the ironmaking process; therefore, a hybrid-model-based
+        distribution computation method was proposed to optimize the conflicting
+        objectives of the blast furnace ironmaking process. In the local mode,
+        the dGRU-SAPGA exhibits a competitive performance in modeling and
+        optimizing the ironmaking process. Based on three-step verification, the
+        hybrid optimization framework in the Spark distribution system was
+        applied to the #2 blast furnace of Guangxi Liuzhou Iron and Steel Group
+        Co. Ltd. After 2 months of application, the multiple production
+        indicators of the blast furnace were significantly improved. It should
+        be noted, however, that the multi-objective optimization service alone
+        is insufficient for the ironmaking process. The distribution
+        computation-based cloud factory is in need of many other services,
+        including intelligent detection, data fusion, fault diagnosis, and
+        advanced control.
+      </div>
+    </div>
+    <div class="sec" id="sec6">
+      <div class="title">Compliance with ethics guidelines</div>
+      <div class="Para" id="Par77">
+        Heng Zhou, Chunjie Yang, and Youxian Sun declare that they have no
+        conflict of interest or financial conflicts to disclose.
+      </div>
+    </div>
+  </div>
+  <div class="back">
+    <div class="ack" bm-preference="1">
+      <div class="title">Acknowledgement</div>
+      <div class="Para" id="Par78">
+        This work was supported in part by the National Natural Science
+        Foundation of China under Grant (61933015). The authors would like to
+        thank Guangxi Liuzhou Iron and Steel Group Co. Ltd.: This article has no
+        chance of being successful without its support and cooperation. The
+        author Heng Zhou would also like to thank his lab-mates for their
+        dedication and sacrifice.
+      </div>
+    </div>
+    <app-group bm-preference="2"
+      ><app><div class="title">Appendix</div></app></app-group
+    >
+    <div class="fn-group" bm-preference="4">
+      <div class="title">Footnotes</div>
+      <div id="fn1" class="fn">
+        <div class="label">1</div>
+        <div class="Para" id="Par79">
+          The computing framework layer, which sits between the storage and
+          service layers, contains a hybrid model based on deep learning and an
+          evolutionary algorithm
+        </div>
+      </div>
+      <div id="fn2" class="fn">
+        <div class="label">2</div>
+        <div class="Para" id="Par80">
+          There is no need for the ironmaking plant to store all the
+          manufacturing data, while academic researchers can work on practical
+          data from other places. By using Apache Spark and cloud computing
+        </div>
+      </div>
+      <div id="fn3" class="fn">
+        <div class="label">3</div>
+        <div class="Para" id="Par81">
+          Based on the preprocessing of the cluster analysis, modeling methods
+          are used to obtain the dynamic information of the blast furnace
+          ironmaking process
+        </div>
+      </div>
+    </div>
+    <div class="ref-list" bm-preference="6">
+      <div class="title">References</div>
+      <div id="B1" class="ref" pubscore="3">
+        <label>1</label
+        ><mixed-citation publication-type="journal">
+          <string-name
+            ><surname>Pan</surname>, <given-names>Y.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Yang</surname>, <given-names>C.</given-names></string-name
+          >,
+          <string-name
+            ><surname>An</surname>, <given-names>R.</given-names></string-name
+          >, &amp;
+          <string-name
+            ><surname>Sun</surname>, <given-names>Y.</given-names></string-name
+          >
+          (<year>2018</year>).
+          <article-title
+            >Robust principal component pursuit for fault detection in a blast
+            furnace process</article-title
+          >. <refsource>Ind Eng Chem Res</refsource>,
+          <volume>57</volume>(<issue>1</issue>),
+          <fpage>283</fpage>–<lpage>91</lpage>.</mixed-citation
+        >
+      </div>
+      <div id="B2" class="ref" pubscore="3">
+        <label>2</label
+        ><mixed-citation publication-type="journal">
+          <string-name
+            ><surname>Zhu</surname>, <given-names>X.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Zhu</surname>, <given-names>Y.</given-names></string-name
+          >, &amp;
+          <string-name
+            ><surname>Zheng</surname>,
+            <given-names>W.</given-names></string-name
+          >
+          (<year>2020</year>).
+          <article-title
+            >Spectral rotation for deep one-step clustering</article-title
+          >. <refsource>Pattern Recognit</refsource>,
+          <volume>105</volume>.107175</mixed-citation
+        >
+      </div>
+      <div id="B3" class="ref" pubscore="3">
+        <label>3</label
+        ><mixed-citation publication-type="journal">
+          <string-name
+            ><surname>Zhao</surname>, <given-names>C.</given-names></string-name
+          >, &amp;
+          <string-name
+            ><surname>Sun</surname>, <given-names>Y.</given-names></string-name
+          >
+          (<year>2013</year>).
+          <article-title
+            >Step-wise sequential phase partition (SSPP) algorithm based
+            statistical modeling and online process monitoring</article-title
+          >. <refsource>Chemom Intell Lab Syst</refsource>,
+          <volume>125</volume>,
+          <fpage>109</fpage>–<lpage>20</lpage>.</mixed-citation
+        >
+      </div>
+      <div id="B4" class="ref" pubscore="3">
+        <label>4</label
+        ><mixed-citation publication-type="journal">
+          <string-name
+            ><surname>Liu</surname>, <given-names>J.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Ren</surname>, <given-names>Z.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Lu</surname>, <given-names>R.</given-names></string-name
+          >, &amp;
+          <string-name
+            ><surname>Luo</surname>, <given-names>X.</given-names></string-name
+          >
+          (<year>2021</year>).
+          <article-title
+            >GMM discriminant analysis with noisy label for each
+            class</article-title
+          >. <refsource>Neural Comput Appl</refsource>, <volume>33</volume>,
+          <fpage>1171</fpage>–<lpage>91</lpage>.</mixed-citation
+        >
+      </div>
+      <div id="B5" class="ref" pubscore="3">
+        <label>5</label
+        ><mixed-citation publication-type="journal">
+          <string-name
+            ><surname>Sabetsarvestani</surname>,
+            <given-names>Z.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Renna</surname>,
+            <given-names>F.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Kiraly</surname>,
+            <given-names>F.</given-names></string-name
+          >, &amp;
+          <string-name
+            ><surname>Rodrigues</surname>,
+            <given-names>M.</given-names></string-name
+          >
+          (<year>2020</year>).
+          <article-title
+            >Source separation with side information based on Gaussian mixture
+            models with application in art investigation</article-title
+          >. <refsource>IEEE Trans Signal Process</refsource>,
+          <volume>68</volume>,
+          <fpage>558</fpage>–<lpage>72</lpage>.</mixed-citation
+        >
+      </div>
+      <div id="B6" class="ref" pubscore="3">
+        <label>6</label
+        ><mixed-citation publication-type="journal">
+          <string-name
+            ><surname>Li</surname>, <given-names>Z.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Yang</surname>, <given-names>C.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Liu</surname>, <given-names>W.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Zhou</surname>, <given-names>H.</given-names></string-name
+          >, &amp;
+          <string-name
+            ><surname>Li</surname>, <given-names>Y.</given-names></string-name
+          >
+          (<year>2018</year>).
+          <article-title
+            >Research on hot metal Si-content prediction based on
+            LSTM-RNNl</article-title
+          >. <refsource>CIESC Journal</refsource>, <volume>69</volume>,
+          <fpage>992</fpage>–<lpage>7</lpage>.</mixed-citation
+        >
+      </div>
+      <div id="B7" class="ref" pubscore="2">
+        <label>7</label
+        ><mixed-citation publication-type="journal">
+          <string-name
+            ><surname>Che</surname>, <given-names>Z.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Purushotham</surname>,
+            <given-names>S.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Cho</surname>, <given-names>K.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Sontag</surname>,
+            <given-names>D.</given-names></string-name
+          >, &amp;
+          <string-name
+            ><surname>Liu</surname>, <given-names>Y.</given-names></string-name
+          >
+          (<year>2018</year>).
+          <article-title
+            >Recurrent neural networks for multivariate time series with missing
+            values</article-title
+          >. <refsource>Sci Rep</refsource>,
+          <volume>8</volume>(<issue>1</issue>),
+          <fpage>6085</fpage>.</mixed-citation
+        ><pub-med
+          ><string-name
+            ><surname>Che</surname><given-names>Z</given-names></string-name
+          ><string-name
+            ><surname>Purushotham</surname
+            ><given-names>S</given-names></string-name
+          ><string-name
+            ><surname>Cho</surname><given-names>K</given-names></string-name
+          ><string-name
+            ><surname>Sontag</surname><given-names>D</given-names></string-name
+          ><string-name
+            ><surname>Liu</surname><given-names>Y</given-names></string-name
+          ><year>2018</year
+          ><article-title
+            >Recurrent Neural Networks for Multivariate Time Series with Missing
+            Values.</article-title
+          ><refsource>Sci Rep</refsource><volume>8</volume><issue>1</issue
+          ><fpage>6085</fpage
+          ><ext-link
+            ext-link-type="doi"
+            xlink:href="10.1038/s41598-018-24271-9"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            >10.1038/s41598-018-24271-9</ext-link
+          ><pub-id pub-id-type="pmid">PMC5904216</pub-id></pub-med
+        >
+      </div>
+      <div id="B8" class="ref" pubscore="3">
+        <label>8</label
+        ><mixed-citation publication-type="journal">
+          <string-name
+            ><surname>Chung</surname>,
+            <given-names>J.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Gulcehre</surname>,
+            <given-names>C.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Cho</surname>, <given-names>K.</given-names></string-name
+          >, &amp;
+          <string-name
+            ><surname>Bengio</surname>,
+            <given-names>Y.</given-names></string-name
+          >
+          (<year>2014</year>).
+          <article-title
+            >Empirical evaluation of gated recurrent neural networks on sequence
+            modeling</article-title
+          >. <refsource>Comput SCI</refsource>.</mixed-citation
+        >
+      </div>
+      <div id="B9" class="ref" pubscore="3">
+        <label>9</label
+        ><mixed-citation publication-type="journal">
+          <string-name
+            ><surname>Zhou</surname>, <given-names>H.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Zhang</surname>,
+            <given-names>H.</given-names></string-name
+          >, &amp;
+          <string-name
+            ><surname>Yang</surname>, <given-names>C.</given-names></string-name
+          >
+          (<year>2020</year>).
+          <article-title
+            >Hybrid-model-based intelligent optimization of ironmaking
+            process</article-title
+          >. <refsource>IEEE Trans Ind Electron</refsource>,
+          <volume>67</volume>(<issue>3</issue>),
+          <fpage>2469</fpage>–<lpage>790</lpage>.</mixed-citation
+        >
+      </div>
+      <div id="B10" class="ref" pubscore="3">
+        <label>10</label
+        ><mixed-citation publication-type="journal">
+          <string-name
+            ><surname>Whitley</surname>,
+            <given-names>D.</given-names></string-name
+          >
+          (<year>1994</year>).
+          <article-title>A genetic algorithm tutorial</article-title>.
+          <refsource>Stat Comput</refsource>,
+          <volume>4</volume>(<issue>2</issue>),
+          <fpage>65</fpage>–<lpage>85</lpage>.</mixed-citation
+        >
+      </div>
+      <div id="B11" class="ref" pubscore="2">
+        <label>11</label
+        ><mixed-citation publication-type="journal">
+          <string-name
+            ><surname>Bozkurt</surname>,
+            <given-names>E.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Perez</surname>,
+            <given-names>M. A. S.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Hovius</surname>,
+            <given-names>R.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Browning</surname>,
+            <given-names>N. J.</given-names></string-name
+          >, &amp;
+          <string-name
+            ><surname>Rothlisberger</surname>,
+            <given-names>U.</given-names></string-name
+          >
+          (<year>2018</year>).
+          <article-title
+            >A genetic algorithm based design and experimental characterization
+            of a highly thermostable metalloprotein</article-title
+          >. <refsource>J Am Chem Soc</refsource>,
+          <volume>140</volume>(<issue>13</issue>),
+          <fpage>4517</fpage>–<lpage>21</lpage>.</mixed-citation
+        ><pub-med
+          ><string-name
+            ><surname>Bozkurt</surname><given-names>E</given-names></string-name
+          ><string-name
+            ><surname>Perez</surname><given-names>MAS</given-names></string-name
+          ><string-name
+            ><surname>Hovius</surname><given-names>R</given-names></string-name
+          ><string-name
+            ><surname>Browning</surname
+            ><given-names>NJ</given-names></string-name
+          ><string-name
+            ><surname>Rothlisberger</surname
+            ><given-names>U</given-names></string-name
+          ><year>2018</year
+          ><article-title
+            >Genetic Algorithm Based Design and Experimental Characterization of
+            a Highly Thermostable Metalloprotein.</article-title
+          ><refsource>J Am Chem Soc</refsource><volume>140</volume
+          ><issue>13</issue><fpage>4517</fpage><lpage>4521</lpage
+          ><ext-link
+            ext-link-type="doi"
+            xlink:href="10.1021/jacs.7b10660"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            >10.1021/jacs.7b10660</ext-link
+          ></pub-med
+        >
+      </div>
+      <div id="B12" class="ref" pubscore="3">
+        <label>12</label
+        ><mixed-citation publication-type="journal">
+          <string-name
+            ><surname>Yang</surname>, <given-names>C.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Zhou</surname>, <given-names>H.</given-names></string-name
+          >, &amp;
+          <string-name
+            ><surname>Li</surname>, <given-names>Z.</given-names></string-name
+          >
+          (<year>2017</year>).
+          <refsource
+            ><i
+              >“A multi-objective optimization model based on long short-term
+              memory and non-dominated sorting genetic algorithm II</i
+            ></refsource
+          >
+          (pp. <fpage>1635</fpage>–<lpage>40</lpage>).
+          <publisher-loc>Jinan, China. New York</publisher-loc>:
+          <publisher-name>IEEE</publisher-name>.In proceedings of 2017 Chinese
+          Automation Congress (CAC)2017 Oct 20–22;</mixed-citation
+        >
+      </div>
+      <div id="B13" class="ref" pubscore="3">
+        <label>13</label
+        ><mixed-citation publication-type="journal">
+          <string-name
+            ><surname>Koumousis</surname>,
+            <given-names>V. K.</given-names></string-name
+          >, &amp;
+          <string-name
+            ><surname>Katsaras</surname>,
+            <given-names>C. P.</given-names></string-name
+          >
+          (<year>2006</year>).
+          <article-title
+            >A sawtooth genetic algorithm combining the effects of variable
+            population size and reinitialization to enhance
+            performance</article-title
+          >. <refsource>IEEE Trans Evol Comput</refsource>,
+          <volume>10</volume>(<issue>1</issue>),
+          <fpage>19</fpage>–<lpage>28</lpage>.</mixed-citation
+        >
+      </div>
+      <div id="B14" class="ref" pubscore="3">
+        <label>14</label
+        ><mixed-citation publication-type="journal">
+          <string-name
+            ><surname>Zhou</surname>, <given-names>H.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Li</surname>, <given-names>Y.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Yang</surname>, <given-names>C.</given-names></string-name
+          >, &amp;
+          <string-name
+            ><surname>Sun</surname>, <given-names>Y.</given-names></string-name
+          >
+          (<year>2020</year>).
+          <article-title
+            >Mixed-framework-based energy optimization of chemi-mechanical
+            pulping</article-title
+          >. <refsource>IEEE Trans Industr Inform</refsource>,
+          <volume>16</volume>(<issue>9</issue>),
+          <fpage>5895</fpage>–<lpage>904</lpage>.</mixed-citation
+        >
+      </div>
+      <div id="B15" class="ref" pubscore="3">
+        <label>15</label
+        ><mixed-citation publication-type="journal">
+          <string-name
+            ><surname>Srinivas</surname>,
+            <given-names>M.</given-names></string-name
+          >, &amp;
+          <string-name
+            ><surname>Patnaik</surname>,
+            <given-names>L. M.</given-names></string-name
+          >
+          (<year>1994</year>).
+          <article-title
+            >Adaptive probabilities of crossover and mutation in genetic
+            algorithms</article-title
+          >. <refsource>IEEE Trans Syst Man Cybern</refsource>,
+          <volume>24</volume>(<issue>4</issue>),
+          <fpage>656</fpage>–<lpage>67</lpage>.</mixed-citation
+        >
+      </div>
+      <div id="B16" class="ref" pubscore="3">
+        <label>16</label
+        ><mixed-citation publication-type="journal">
+          <string-name
+            ><surname>Adler</surname>,
+            <given-names>D.</given-names></string-name
+          >
+          (<year>1993</year>).
+          <refsource
+            ><i
+              >Genetic algorithms and simulated annealing: A marriage
+              proposal</i
+            ></refsource
+          >
+          (pp. <fpage>1104</fpage>–<lpage>9</lpage>).
+          <publisher-loc>San Francisco (CA), USA. New York</publisher-loc>:
+          <publisher-name>IEEE</publisher-name>.In proceedings of IEEE
+          International Conference on Neural Networks</mixed-citation
+        >
+      </div>
+      <div id="B17" class="ref" pubscore="3">
+        <label>17</label
+        ><mixed-citation publication-type="journal">
+          <string-name
+            ><surname>Yi</surname>,
+            <given-names>J. H.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Deb</surname>, <given-names>S.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Dong</surname>, <given-names>J.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Alavi</surname>,
+            <given-names>A. H.</given-names></string-name
+          >, &amp;
+          <string-name
+            ><surname>Wang</surname>,
+            <given-names>G. G.</given-names></string-name
+          >
+          (<year>2018</year>).
+          <article-title
+            >An improved NSGA-III algorithm with adaptive mutation operator for
+            Big Data optimization problems</article-title
+          >. <refsource>Future Gener Comput Syst</refsource>,
+          <volume>88</volume>,
+          <fpage>571</fpage>–<lpage>85</lpage>.</mixed-citation
+        >
+      </div>
+      <div id="B18" class="ref" pubscore="3">
+        <label>18</label
+        ><mixed-citation publication-type="journal">
+          <string-name
+            ><surname>Li</surname>, <given-names>Z.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Yang</surname>, <given-names>C.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Liu</surname>, <given-names>W.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Zhou</surname>, <given-names>H.</given-names></string-name
+          >, &amp;
+          <string-name
+            ><surname>Li</surname>, <given-names>Y.</given-names></string-name
+          >
+          (<year>2018</year>).
+          <article-title
+            >Research on hot metal Si-content prediction based on
+            LSTM-RNNl</article-title
+          >. <refsource>CIESC Journal</refsource>, <volume>69</volume>,
+          <fpage>992</fpage>–<lpage>7</lpage>.</mixed-citation
+        >
+      </div>
+      <div id="B19" class="ref" pubscore="2">
+        <label>19</label
+        ><mixed-citation publication-type="journal">
+          <string-name
+            ><surname>Che</surname>, <given-names>Z.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Purushotham</surname>,
+            <given-names>S.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Cho</surname>, <given-names>K.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Sontag</surname>,
+            <given-names>D.</given-names></string-name
+          >, &amp;
+          <string-name
+            ><surname>Liu</surname>, <given-names>Y.</given-names></string-name
+          >
+          (<year>2018</year>).
+          <article-title
+            >Recurrent neural networks for multivariate time series with missing
+            values</article-title
+          >. <refsource>Sci Rep</refsource>,
+          <volume>8</volume>(<issue>1</issue>),
+          <fpage>6085</fpage>.</mixed-citation
+        ><pub-med
+          ><string-name
+            ><surname>Che</surname><given-names>Z</given-names></string-name
+          ><string-name
+            ><surname>Purushotham</surname
+            ><given-names>S</given-names></string-name
+          ><string-name
+            ><surname>Cho</surname><given-names>K</given-names></string-name
+          ><string-name
+            ><surname>Sontag</surname><given-names>D</given-names></string-name
+          ><string-name
+            ><surname>Liu</surname><given-names>Y</given-names></string-name
+          ><year>2018</year
+          ><article-title
+            >Recurrent Neural Networks for Multivariate Time Series with Missing
+            Values.</article-title
+          ><refsource>Sci Rep</refsource><volume>8</volume><issue>1</issue
+          ><fpage>6085</fpage
+          ><ext-link
+            ext-link-type="doi"
+            xlink:href="10.1038/s41598-018-24271-9"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            >10.1038/s41598-018-24271-9</ext-link
+          ><pub-id pub-id-type="pmid">PMC5904216</pub-id></pub-med
+        >
+      </div>
+      <div id="B20" class="ref" pubscore="3">
+        <label>20</label
+        ><mixed-citation publication-type="journal">
+          <string-name
+            ><surname>Chung</surname>,
+            <given-names>J.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Gulcehre</surname>,
+            <given-names>C.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Cho</surname>, <given-names>K.</given-names></string-name
+          >, &amp;
+          <string-name
+            ><surname>Bengio</surname>,
+            <given-names>Y.</given-names></string-name
+          >
+          (<year>2014</year>).
+          <article-title
+            >Empirical evaluation of gated recurrent neural networks on sequence
+            modeling</article-title
+          >. <refsource>Comput SCI</refsource>.</mixed-citation
+        >
+      </div>
+      <div id="B21" class="ref" pubscore="3">
+        <label>21</label
+        ><mixed-citation publication-type="journal">
+          <string-name
+            ><surname>Zhou</surname>, <given-names>H.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Zhang</surname>,
+            <given-names>H.</given-names></string-name
+          >, &amp;
+          <string-name
+            ><surname>Yang</surname>, <given-names>C.</given-names></string-name
+          >
+          (<year>2020</year>).
+          <article-title
+            >Hybrid-model-based intelligent optimization of ironmaking
+            process</article-title
+          >. <refsource>IEEE Trans Ind Electron</refsource>,
+          <volume>67</volume>(<issue>3</issue>),
+          <fpage>2469</fpage>–<lpage>790</lpage>.</mixed-citation
+        >
+      </div>
+      <div id="B22" class="ref" pubscore="3">
+        <label>22</label
+        ><mixed-citation publication-type="journal">
+          <string-name
+            ><surname>Whitley</surname>,
+            <given-names>D.</given-names></string-name
+          >
+          (<year>1994</year>).
+          <article-title>A genetic algorithm tutorial</article-title>.
+          <refsource>Stat Comput</refsource>,
+          <volume>4</volume>(<issue>2</issue>),
+          <fpage>65</fpage>–<lpage>85</lpage>.</mixed-citation
+        >
+      </div>
+      <div id="B23" class="ref" pubscore="2">
+        <label>23</label
+        ><mixed-citation publication-type="journal">
+          <string-name
+            ><surname>Bozkurt</surname>,
+            <given-names>E.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Perez</surname>,
+            <given-names>M. A. S.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Hovius</surname>,
+            <given-names>R.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Browning</surname>,
+            <given-names>N. J.</given-names></string-name
+          >, &amp;
+          <string-name
+            ><surname>Rothlisberger</surname>,
+            <given-names>U.</given-names></string-name
+          >
+          (<year>2018</year>).
+          <article-title
+            >A genetic algorithm based design and experimental characterization
+            of a highly thermostable metalloprotein</article-title
+          >. <refsource>J Am Chem Soc</refsource>,
+          <volume>140</volume>(<issue>13</issue>),
+          <fpage>4517</fpage>–<lpage>21</lpage>.</mixed-citation
+        ><pub-med
+          ><string-name
+            ><surname>Bozkurt</surname><given-names>E</given-names></string-name
+          ><string-name
+            ><surname>Perez</surname><given-names>MAS</given-names></string-name
+          ><string-name
+            ><surname>Hovius</surname><given-names>R</given-names></string-name
+          ><string-name
+            ><surname>Browning</surname
+            ><given-names>NJ</given-names></string-name
+          ><string-name
+            ><surname>Rothlisberger</surname
+            ><given-names>U</given-names></string-name
+          ><year>2018</year
+          ><article-title
+            >Genetic Algorithm Based Design and Experimental Characterization of
+            a Highly Thermostable Metalloprotein.</article-title
+          ><refsource>J Am Chem Soc</refsource><volume>140</volume
+          ><issue>13</issue><fpage>4517</fpage><lpage>4521</lpage
+          ><ext-link
+            ext-link-type="doi"
+            xlink:href="10.1021/jacs.7b10660"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            >10.1021/jacs.7b10660</ext-link
+          ></pub-med
+        >
+      </div>
+      <div id="B24" class="ref" pubscore="3">
+        <label>24</label
+        ><mixed-citation publication-type="book">
+          <string-name
+            ><surname>Yang</surname>, <given-names>C.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Zhou</surname>, <given-names>H.</given-names></string-name
+          >, &amp;
+          <string-name
+            ><surname>Li</surname>, <given-names>Z.</given-names></string-name
+          >
+          (<year>2017</year>).
+          <refsource
+            ><i
+              >“A multi-objective optimization model based on long short-term
+              memory and non-dominated sorting genetic algorithm II</i
+            ></refsource
+          >
+          (pp. <fpage>1635</fpage>–<lpage>40</lpage>).
+          <publisher-loc>Jinan, China. New York</publisher-loc>:
+          <publisher-name>IEEE</publisher-name>.In proceedings of 2017 Chinese
+          Automation Congress (CAC)2017 Oct 20–22;</mixed-citation
+        >
+      </div>
+      <div id="B25" class="ref" pubscore="3">
+        <label>25</label
+        ><mixed-citation publication-type="journal">
+          <string-name
+            ><surname>Koumousis</surname>,
+            <given-names>V. K.</given-names></string-name
+          >, &amp;
+          <string-name
+            ><surname>Katsaras</surname>,
+            <given-names>C. P.</given-names></string-name
+          >
+          (<year>2006</year>).
+          <article-title
+            >A sawtooth genetic algorithm combining the effects of variable
+            population size and reinitialization to enhance
+            performance</article-title
+          >. <refsource>IEEE Trans Evol Comput</refsource>,
+          <volume>10</volume>(<issue>1</issue>),
+          <fpage>19</fpage>–<lpage>28</lpage>.</mixed-citation
+        >
+      </div>
+      <div id="B26" class="ref" pubscore="3">
+        <label>26</label
+        ><mixed-citation publication-type="journal">
+          <string-name
+            ><surname>Zhou</surname>, <given-names>H.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Li</surname>, <given-names>Y.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Yang</surname>, <given-names>C.</given-names></string-name
+          >, &amp;
+          <string-name
+            ><surname>Sun</surname>, <given-names>Y.</given-names></string-name
+          >
+          (<year>2020</year>).
+          <article-title
+            >Mixed-framework-based energy optimization of chemi-mechanical
+            pulping</article-title
+          >. <refsource>IEEE Trans Industr Inform</refsource>,
+          <volume>16</volume>(<issue>9</issue>),
+          <fpage>5895</fpage>–<lpage>904</lpage>.</mixed-citation
+        >
+      </div>
+      <div id="B27" class="ref" pubscore="3">
+        <label>27</label
+        ><mixed-citation publication-type="journal">
+          <string-name
+            ><surname>Srinivas</surname>,
+            <given-names>M.</given-names></string-name
+          >, &amp;
+          <string-name
+            ><surname>Patnaik</surname>,
+            <given-names>L. M.</given-names></string-name
+          >
+          (<year>1994</year>).
+          <article-title
+            >Adaptive probabilities of crossover and mutation in genetic
+            algorithms</article-title
+          >. <refsource>IEEE Trans Syst Man Cybern</refsource>,
+          <volume>24</volume>(<issue>4</issue>),
+          <fpage>656</fpage>–<lpage>67</lpage>.</mixed-citation
+        >
+      </div>
+      <div id="B28" class="ref" pubscore="3">
+        <label>28</label
+        ><mixed-citation publication-type="book">
+          <string-name
+            ><surname>Łukasik</surname>,
+            <given-names>S.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Kowalski</surname>,
+            <given-names>P. A.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Charytanowicz</surname>,
+            <given-names>M.</given-names></string-name
+          >, &amp;
+          <string-name
+            ><surname>Kulczycki</surname>,
+            <given-names>P.</given-names></string-name
+          >
+          (<year>2016</year>).
+          <refsource
+            ><i
+              >Clustering using flower pollination algorithm and
+              calinski-harabasz index</i
+            ></refsource
+          >
+          (pp. <fpage>2724</fpage>–<lpage>8</lpage>).
+          <publisher-loc>Vancouver (BC), Canada. New York</publisher-loc>:
+          <publisher-name>IEEE</publisher-name>.In proceedings of 2016 IEEE
+          Congress on Evolutionary Computation (CEC)2016 Jul
+          24–29;</mixed-citation
+        >
+      </div>
+      <div id="B29" class="ref" pubscore="3">
+        <label>29</label
+        ><mixed-citation publication-type="book">
+          <string-name
+            ><surname>Adler</surname>,
+            <given-names>D.</given-names></string-name
+          >
+          (<year>1993</year>).
+          <refsource
+            ><i
+              >Genetic algorithms and simulated annealing: A marriage
+              proposal</i
+            ></refsource
+          >
+          (pp. <fpage>1104</fpage>–<lpage>9</lpage>).
+          <publisher-loc>San Francisco (CA), USA. New York</publisher-loc>:
+          <publisher-name>IEEE</publisher-name>.In proceedings of IEEE
+          International Conference on Neural Networks</mixed-citation
+        >
+      </div>
+      <div id="B30" class="ref" pubscore="3">
+        <label>30</label
+        ><mixed-citation publication-type="journal">
+          <string-name
+            ><surname>Yi</surname>,
+            <given-names>J. H.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Deb</surname>, <given-names>S.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Dong</surname>, <given-names>J.</given-names></string-name
+          >,
+          <string-name
+            ><surname>Alavi</surname>,
+            <given-names>A. H.</given-names></string-name
+          >, &amp;
+          <string-name
+            ><surname>Wang</surname>,
+            <given-names>G. G.</given-names></string-name
+          >
+          (<year>2018</year>).
+          <article-title
+            >An improved NSGA-III algorithm with adaptive mutation operator for
+            Big Data optimization problems</article-title
+          >. <refsource>Future Gener Comput Syst</refsource>,
+          <volume>88</volume>,
+          <fpage>571</fpage>–<lpage>85</lpage>.</mixed-citation
+        >
+      </div>
+    </div>
+  </div>
+</div>
