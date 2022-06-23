@@ -24,6 +24,27 @@ const convert = function () {
 	return true;
  }
  
+ const get_content = function(data) {
+	
+	let content_val = ''
+	
+	data.child.forEach(element =>{
+		
+		if (element.node == 'text' && element.text != '\n'){
+			
+			content_val += element.text
+		}
+		
+		if(element.node == 'element'){
+			
+			content_val += get_content(element)
+		}
+	});
+	
+	return content_val
+	
+ }
+ 
  
  const findChild = function (data,p_id,level) { 
 	
@@ -54,29 +75,30 @@ const convert = function () {
 				{
 					element.child.forEach(element1 =>{
 						
-						if(element1.node == 'text')
+						if(element1.node == 'text' && element1.text != '\n')
 						{
-							if(element1.text != '\n')
-							{
-								content += element1.text
-							}
-							
+							content += element1.text
 						}
 					
 					})
 					
-					if(content != '')
-					{
+					if(content != ''){
+						
 						result.content_type = 'content'	
-					}else{
-						result.content_type = 'container'	
+						content = get_content(element)
+						result.content = content	
+						// console.log('content:',content)
 					}
-					
-					result.content = content
+					else{
+						
+						result.content_type = 'container'
+						result.content = content
+						findChild(element.child,result.id,level+1)	
+					}
 				
 					console.log('result:',result)
 					
-					findChild(element.child,result.id,level+1)
+					
 				}	
 			}
 			

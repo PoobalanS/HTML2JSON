@@ -2221,7 +2221,7 @@ module.exports = {
                                       "child": [
                                         {
                                           "node": "text",
-                                          "text": "\n\\overline{f}\n"
+                                          "text": "\n  \\overline{f}\n"
                                         }
                                       ]
                                     },
@@ -2273,7 +2273,7 @@ module.exports = {
                                       "child": [
                                         {
                                           "node": "text",
-                                          "text": "\nn_{i}^{h} (t + 1)\n"
+                                          "text": "\n  n_{i}^{h} (t + 1)\n"
                                         }
                                       ]
                                     },
@@ -4938,3 +4938,4 @@ module.exports = {
     }
   ]
 }
+
